@@ -1,9 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+
+    <div class="row mt-4">
     {% for object in object_list %}
-    {{object.title}}
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <a href="{{object.get_absolute_url}}">
+                    <img src="{{object.thumbnail.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">{{object.title}}</h5>
+                    <p class="card-text">{{object.content | truncatechars:40}}</p>
+                </a>
+                <hr>
+                  <p>
+                      <span><i class="fa fa-eye ml-2">{{object.get_view_count}}</i></span>
+                      <span><i class="fa fa-thumbs-up ml-2">{{object.get_like_count}}</i></span>
+                      <span><i class="fa fa-comments ml-2">{{object.get_comment_count}}</i></span>
+                  </p>
+                  <p class="card-text">Posted {{object.publish_date | timesince}} ago</p>
+            </div>
+        </div>
+        </div>
     {% endfor %}
-</div>
+
 {% endblock content %}
